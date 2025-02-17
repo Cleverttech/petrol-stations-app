@@ -1,3 +1,2 @@
-# Petrol Stations in Cologne
-
+# Petrol stations app
 
