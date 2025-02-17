@@ -1,43 +1,45 @@
-import  { useEffect } from 'react';
+import  { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const API_URL =
   'https://geoportal.stadt-koeln.de/arcgis/rest/services/verkehr/gefahrgutstrecken/MapServer/0/query?where=objectid+is+not+null&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&havingClause=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&returnExtentOnly=false&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&featureEncoding=esriDefault&f=pjson';
 
- const fetchGasStations = async () => {
+ const fetchPetrolStations = async () => {
   try {
     const response = await axios.get(API_URL);
     console.log("response", response)
-    
-    /* return response.data.result.records.map((station) => ({
-      id: station.objectid,
-      address: station.adresse,
-    }));*/
+    const petrolStationsData = response.data.features
+
+     return petrolStationsData.map((station) => ({
+      id: station.attributes.objectid,
+      address: station.attributes.adresse,
+    }))
   } catch (error) {
-    console.error('Error fetching gas station data:', error);
+    console.error('Could not fetch petrol stations', error);
     throw error;
   }
 };
 
 
 const PetrolStationList = () => {
- // const [gasStations, setGasStations] = useState([]);
+ const [petrolStations, setPetrolStations] = useState([]);
 
   useEffect(() => {
-    fetchGasStations()
-      .then((data) => console.log("data",data))
+    fetchPetrolStations()
+      .then((data) => setPetrolStations(data))
       .catch((error) => console.error(error));
   }, []);
 
+  console.log("petrolStations", petrolStations)
+
   return (
     <div>
-      <h2>Gas Stations</h2>
+      <h2>Petrol Stations</h2>
       <ul>
-        {/*
-                {gasStations.map((station) => (
+        {petrolStations.map((station) => (
           <li key={station.id}>{station.address}</li>
         ))}
-        */}
+  
       </ul>
     </div>
   );
