@@ -7,7 +7,6 @@ const API_URL =
  const fetchPetrolStations = async () => {
   try {
     const response = await axios.get(API_URL);
-    console.log("response", response)
     const petrolStationsData = response.data.features
 
      return petrolStationsData.map((station) => ({
@@ -30,8 +29,6 @@ const PetrolStationList = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  console.log("petrolStations", petrolStations)
-
   return (
     <div>
       <h2>Petrol Stations</h2>
@@ -39,7 +36,6 @@ const PetrolStationList = () => {
         {petrolStations.map((station) => (
           <li key={station.id}>{station.address}</li>
         ))}
-  
       </ul>
     </div>
   );
