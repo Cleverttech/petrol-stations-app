@@ -1,5 +1,8 @@
 import  { useEffect, useState } from 'react';
 import axios from 'axios';
+import {List, ListItem, ListSubheader, TextField }from '@mui/material';
+
+
 
 const API_URL =
   'https://geoportal.stadt-koeln.de/arcgis/rest/services/verkehr/gefahrgutstrecken/MapServer/0/query?where=objectid+is+not+null&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&havingClause=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&returnExtentOnly=false&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&featureEncoding=esriDefault&f=pjson';
@@ -21,7 +24,16 @@ const API_URL =
 
 
 const PetrolStationList = () => {
- const [petrolStations, setPetrolStations] = useState([]);
+  const [petrolStations, setPetrolStations] = useState([]);
+  const [searchStation, setSearchStation] = useState('');
+
+   const handleOnChangeSearchStation =(e)=>{
+       setSearchStation(e.target.value)
+   }
+
+   const filteredPetrolStations = petrolStations.filter((station)=> station.address.toLowerCase().includes(searchStation.toLocaleLowerCase())
+   )
+   
 
   useEffect(() => {
     fetchPetrolStations()
@@ -31,12 +43,27 @@ const PetrolStationList = () => {
 
   return (
     <div>
-      <h2>Petrol Stations</h2>
-      <ul>
-        {petrolStations.map((station) => (
-          <li key={station.id}>{station.address}</li>
+      <h2>Find your nearest petrol station</h2>
+      <TextField
+        label="Search by street name"
+        variant="outlined"
+         sx={{ width: '50%' }}
+        margin="normal"
+        onChange={handleOnChangeSearchStation}
+      />
+      <List
+        sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+        subheader={
+        <ListSubheader component="div" id="nested-list-subheader">
+          All petrol stations in Cologne
+        </ListSubheader>
+      }>
+        {filteredPetrolStations.map((station) => (
+          <ListItem key={station.id}>{station.address}</ListItem>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };
