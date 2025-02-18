@@ -1,6 +1,6 @@
 import  { useEffect, useState } from 'react';
 import axios from 'axios';
-import {List, ListItem, ListSubheader, TextField, Button }from '@mui/material';
+import {List, ListItem, ListSubheader, TextField, Button, Box }from '@mui/material';
 
 
 const API_URL =
@@ -44,18 +44,24 @@ const PetrolStationList = () => {
   return (
     <div>
       <h2>Find your nearest petrol station</h2>
-      <TextField
-        label="Search by street name"
-        variant="outlined"
-         sx={{ width: '50%' }}
-        margin="normal"
-        onChange={handleOnChangeSearchStation}
-      />
-      <Button variant="contained" onClick={() => setStationSortOrder(sortStationOrder === 'asc' ? 'desc' : 'asc')}>
-         Sort ({sortStationOrder})
-      </Button>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1}}>
+        <TextField
+          label="Search by street name"
+          variant="outlined"
+          sx={{ width: '50%' }}
+          margin="normal"
+          onChange={handleOnChangeSearchStation}
+        />
+        <Button
+          sx={{ margin: 2, width: "13%"}}  
+          variant="contained"
+          onClick={() => setStationSortOrder(sortStationOrder === 'asc' ? 'desc' : 'asc')}
+        >
+          sort({sortStationOrder})
+        </Button>
+      </Box>
       <List
-        sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+        sx={ListStyle}
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={
@@ -71,3 +77,7 @@ const PetrolStationList = () => {
   );
 };
 export default PetrolStationList;
+
+const ListStyle = {
+   width: '100%', maxWidth: 360, bgcolor: 'background.paper' 
+}
