@@ -1,7 +1,6 @@
 import  { useEffect, useState } from 'react';
 import axios from 'axios';
-import {List, ListItem, ListSubheader, TextField }from '@mui/material';
-
+import {List, ListItem, ListSubheader, TextField, Button }from '@mui/material';
 
 
 const API_URL =
@@ -26,15 +25,16 @@ const API_URL =
 const PetrolStationList = () => {
   const [petrolStations, setPetrolStations] = useState([]);
   const [searchStation, setSearchStation] = useState('');
+  const [sortStationOrder, setStationSortOrder] = useState('asc');
 
    const handleOnChangeSearchStation =(e)=>{
        setSearchStation(e.target.value)
    }
 
-   const filteredPetrolStations = petrolStations.filter((station)=> station.address.toLowerCase().includes(searchStation.toLocaleLowerCase())
-   )
+   const filteredPetrolStations = petrolStations
+   .filter((station)=> station.address.toLowerCase().includes(searchStation.toLocaleLowerCase()))
+   .sort((a, b) => (sortStationOrder === 'asc' ? a.address.localeCompare(b.address) : b.address.localeCompare(a.address)))
    
-
   useEffect(() => {
     fetchPetrolStations()
       .then((data) => setPetrolStations(data))
@@ -51,6 +51,9 @@ const PetrolStationList = () => {
         margin="normal"
         onChange={handleOnChangeSearchStation}
       />
+      <Button variant="contained" onClick={() => setStationSortOrder(sortStationOrder === 'asc' ? 'desc' : 'asc')}>
+         Sort ({sortStationOrder})
+      </Button>
       <List
         sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
         component="nav"
