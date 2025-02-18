@@ -1,6 +1,6 @@
 # Petrol stations app
 
-<img src="" alt="demo-Image" margin="auto 0px" />
+<img src="https://github.com/Cleverttech/petrol-stations-app/blob/main/public/demo.png" alt="demo-Image" margin="auto 0px" />
 
 ## Description
 
