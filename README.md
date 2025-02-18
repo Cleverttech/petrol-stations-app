@@ -25,9 +25,18 @@ Search for petrol stations by street name.
 
 • Frontend: React (JavaScript, Material UI)
 
-• Backend: Node.js, Express,
+• Backend: Node.js, Express
  
-• DB: MongoDB
+• DB: MongoDB, Mongoose
+
+## Hosting:
+
+• Frontend: vercel or AWS S3 Bucket
+
+• Backend: Heroku or or An instance of AWS EC2
+
+ 
+
 
 
 
