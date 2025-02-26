@@ -13,17 +13,13 @@ Search for petrol stations by street name.
 
 ## Models
 
-User model
+Station model
 
 ```javascript
 {
-  username: {type: String, required: true},
-  email: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
-  image: {type: String, default : String}
-  role: {type: String}
-  courses: {type: Schema.Types.ObjectId,ref:'Course'}
-  portfolio: {type: Schema.Types.ObjectId,ref:'Portfolio'}
+  id: { type: Number, required: true, unique: true },
+  address: { type: String, required: true },
+  coordinates: { type: [Number], required: true },
 }
 ```
 <br>
