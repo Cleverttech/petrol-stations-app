@@ -7,19 +7,48 @@
 Search for petrol stations by street name.
 
 <br>
+## Components
 
+- PetrolStationList
+
+## Models
+
+User model
+
+```javascript
+{
+  username: {type: String, required: true},
+  email: {type: String, required: true, unique: true},
+  password: {type: String, required: true},
+  image: {type: String, default : String}
+  role: {type: String}
+  courses: {type: Schema.Types.ObjectId,ref:'Course'}
+  portfolio: {type: Schema.Types.ObjectId,ref:'Portfolio'}
+}
+```
+<br>
 
 ## API Endpoints (backend routes)
 
-- CRUD Operations:
+| HTTP Method | URL                         |
+| ----------- | --------------------------- |
+| GET         | `/stations`                 |
+| GET         | `/api/petrol-stations/:id`  |
+| POST        | `/stations`                 |
+| PUT         | `/stations/:id`             |
+| DELETE      | `/stations/:id`             |
 
-- GET /stations → Fetch petrol stations.
 
-- POST /stations → Add new station.
+## Possible Services
 
-- PUT /stations/:id → Update station.
-
-- DELETE /stations/:id → Remove station.
+- Stations Service
+  - stations.filter()
+  - stations.detail(id)
+  - stations.add(id)
+  - stations.delete(id)
+    
+- External Libraries
+  - Material UI
 
 ## Architecture:
 
