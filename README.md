@@ -1,4 +1,7 @@
 # Petrol stations app
+<br>
+[See live demo](https://petrol-stations-app.vercel.app)
+<br>
 
 <img src="https://github.com/Cleverttech/petrol-stations-app/blob/main/public/demo.png" alt="demo-Image" margin="auto 0px" />
 
@@ -23,6 +26,7 @@ Station model
 }
 ```
 <br>
+
 
 ## API Endpoints (backend routes)
 
