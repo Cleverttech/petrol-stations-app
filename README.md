@@ -33,7 +33,7 @@ Station model
 | HTTP Method | URL                         |
 | ----------- | --------------------------- |
 | GET         | `/stations`                 |
-| GET         | `/api/petrol-stations/:id`  |
+| GET         | `/api/stations/:id`  |
 | POST        | `/stations`                 |
 | PUT         | `/stations/:id`             |
 | DELETE      | `/stations/:id`             |
